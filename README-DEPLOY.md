@@ -1,5 +1,11 @@
 # 部署说明（方案 A：采集在外，Netlify 只托管）
 
+> **已上线**：<https://mengqing-studio.netlify.app/>
+> 仓库：<https://github.com/ANdrewLin20007/mengqing-site>（main 分支）
+> Netlify 项目：`mengqing-studio` · 生产可见性已设为 Public · 徽章已关闭
+>
+> 每次 push 到 main 会自动重建；下面的步骤供换机器或重建时参考。
+
 ## 目录结构
 
 ```
