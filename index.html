@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="has-gate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="梦晴工作室官方网站——广州理工学院创新创业团队，聚焦AIGC教育创新、学科竞赛与成果转化。查询成员介绍、获奖情况与活动纪实。">
+  <meta name="theme-color" content="#173f35">
+  <title>梦晴工作室｜梦随晴光起，共绘青春蓝图</title>
+  <style>
+    :root {
+      --green: #173f35;
+      --green-2: #2b6453;
+      --orange: #eb6a44;
+      --gold: #e7b85f;
+      --cream: #f5f1e8;
+      --paper: #fffdf8;
+      --ink: #18352d;
+      --muted: #6a746e;
+      --line: rgba(23, 63, 53, .14);
+      --serif: "Noto Serif SC", "Songti SC", "STSong", serif;
+      --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      --shadow: 0 24px 70px rgba(23, 63, 53, .12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body { color: var(--ink); background: var(--cream); font-family: var(--sans); line-height: 1.75; -webkit-font-smoothing: antialiased; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    svg { display: block; }
+    ::selection { color: var(--paper); background: var(--orange); }
+    .container { width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
+    .section { padding: 104px 0; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; color: var(--orange); font-size: 11px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+    .section-title { font-family: var(--serif); font-size: clamp(34px, 4.3vw, 52px); font-weight: 600; line-height: 1.35; letter-spacing: -.035em; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; margin-bottom: 44px; }
+    .section-desc { max-width: 380px; color: var(--muted); font-size: 14px; }
+
+    /* Navigation */
+    .header { position: fixed; z-index: 100; top: 0; left: 0; width: 100%; transition: background .25s, box-shadow .25s, opacity .7s ease; }
+    .header.scrolled { background: rgba(245, 241, 232, .93); box-shadow: 0 1px 0 var(--line); backdrop-filter: blur(16px); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 88px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; position: relative; z-index: 102; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; color: var(--cream); background: var(--green); border-radius: 50% 50% 46% 54% / 54% 45% 55% 46%; font-family: var(--serif); font-size: 18px; transform: rotate(-7deg); }
+    .brand-mark span { transform: rotate(7deg); }
+    .brand-name { font-family: var(--serif); font-size: 20px; font-weight: 700; letter-spacing: .1em; }
+    .brand-sub { display: block; margin-top: -5px; color: var(--muted); font-size: 8px; letter-spacing: .16em; }
+    .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+    .nav-links a, .nav-links button { position: relative; padding: 0; background: none; border: 0; font-size: 13px; cursor: pointer; }
+    .nav-links a::after, .nav-links button::after { content: ""; position: absolute; right: 0; bottom: -7px; left: 0; height: 2px; background: var(--orange); transform: scaleX(0); transition: transform .2s; }
+    .nav-links a:hover::after, .nav-links button:hover::after { transform: scaleX(1); }
+    .nav-actions { display: flex; align-items: center; gap: 8px; position: relative; z-index: 102; }
+    .nav-search { display: inline-flex; align-items: center; gap: 9px; height: 42px; padding: 0 17px; color: var(--paper); background: var(--green); border: 0; border-radius: 99px; font-size: 12px; cursor: pointer; transition: background .2s, transform .2s; }
+    .nav-search:hover { background: var(--orange); transform: translateY(-2px); }
+    .nav-search svg { width: 16px; }
+    .menu-toggle { display: none; width: 42px; height: 42px; background: transparent; border: 0; cursor: pointer; position: relative; }
+    .menu-toggle span { position: absolute; left: 9px; width: 24px; height: 2px; background: var(--green); transition: .2s; }
+    .menu-toggle span:first-child { top: 16px; }
+    .menu-toggle span:last-child { top: 24px; }
+    .menu-toggle[aria-expanded="true"] span:first-child { top: 20px; transform: rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] span:last-child { top: 20px; transform: rotate(-45deg); }
+
+    /* Hero */
+    .hero { position: relative; padding: clamp(104px, 17vh, 166px) 0 clamp(34px, 8vh, 88px); overflow: hidden; }
+    .hero::before { content: ""; position: absolute; top: -180px; right: -130px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(231,184,95,.16), transparent 66%); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; align-items: center; gap: clamp(30px, 6vh, 84px); }
+    .hero-kicker { display: inline-flex; align-items: center; gap: 9px; margin-bottom: clamp(13px, 2.6vh, 24px); padding: 6px 13px; color: var(--green-2); background: rgba(255,253,248,.65); border: 1px solid var(--line); border-radius: 99px; font-size: 11px; letter-spacing: .06em; }
+    .hero-kicker::before { content: ""; width: 7px; height: 7px; background: var(--orange); border-radius: 50%; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(33px, min(6.2vw, 8.4vh), 76px); font-weight: 600; line-height: 1.18; letter-spacing: -.055em; }
+    .hero h1 span { color: var(--orange); }
+    .hero-en { margin: clamp(9px, 1.8vh, 17px) 0 clamp(11px, 2.4vh, 22px); color: var(--green-2); font-family: Georgia, serif; font-size: clamp(13px, 1.5vw, 17px); font-style: italic; }
+    .hero-copy { max-width: 580px; color: var(--muted); font-size: clamp(12.5px, 1.35vw, 15px); line-height: 1.9; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(16px, 3.2vh, 34px); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 23px; border: 1px solid var(--green); border-radius: 99px; font-size: 13px; font-weight: 600; cursor: pointer; transition: transform .2s, background .2s, color .2s; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { color: var(--paper); background: var(--green); }
+    .btn-primary:hover { background: var(--orange); border-color: var(--orange); }
+    .btn-ghost { background: transparent; }
+    .btn-ghost:hover { background: var(--paper); }
+    .hero-card { position: relative; min-height: 430px; padding: 44px; color: var(--cream); background: var(--green); border-radius: 160px 160px 20px 20px; box-shadow: var(--shadow); overflow: hidden; }
+    .hero-card::before { content: ""; position: absolute; top: 52px; right: 48px; width: 78px; height: 78px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 14px rgba(231,184,95,.08); }
+    .hero-card::after { content: ""; position: absolute; right: -70px; bottom: -120px; width: 330px; height: 330px; border: 1px solid rgba(245,241,232,.14); border-radius: 50%; box-shadow: 0 0 0 40px rgba(245,241,232,.025), 0 0 0 80px rgba(245,241,232,.02); }
+    .hero-card-top { position: relative; z-index: 1; font-size: 9px; letter-spacing: .25em; opacity: .62; }
+    .hero-monogram { position: relative; z-index: 1; margin-top: 52px; font-family: Georgia, serif; font-size: 88px; font-style: italic; line-height: 1; }
+    .hero-motto { position: relative; z-index: 1; margin-top: 18px; font-family: var(--serif); font-size: 25px; line-height: 1.55; }
+    .hero-motto small { display: block; margin-top: 9px; font-family: var(--sans); font-size: 10px; letter-spacing: .15em; opacity: .58; }
+    .hero-card-bottom { position: absolute; z-index: 2; right: 36px; bottom: 32px; left: 36px; display: flex; justify-content: space-between; gap: 12px; padding-top: 20px; border-top: 1px solid rgba(245,241,232,.18); font-size: 10px; }
+    .hero-card-bottom span:last-child { color: var(--gold); }
+    .hero-note { position: absolute; right: -20px; bottom: 40px; z-index: 3; padding: 15px 20px; color: var(--green); background: var(--paper); box-shadow: 0 12px 30px rgba(23,63,53,.14); font-family: var(--serif); font-size: 14px; transform: rotate(-4deg); }
+
+    /* Facts and introduction */
+    .fact-bar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .fact { padding: 28px 26px; border-right: 1px solid var(--line); }
+    .fact:first-child { padding-left: 0; }
+    .fact:last-child { border-right: 0; }
+    .fact strong { display: block; margin-bottom: 3px; font-family: var(--serif); font-size: 23px; font-weight: 600; }
+    .fact span { color: var(--muted); font-size: 11px; }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 100px; }
+    .about-lead { margin-bottom: 23px; font-family: var(--serif); font-size: 23px; line-height: 1.8; }
+    .about-text { color: var(--muted); font-size: 14px; line-height: 2; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 30px; }
+    .principle { padding: 22px 14px; background: rgba(255,253,248,.65); border: 1px solid var(--line); border-radius: 7px; text-align: center; }
+    .principle strong { display: block; font-family: var(--serif); font-size: 18px; font-weight: 600; }
+    .principle span { color: var(--muted); font-size: 9px; letter-spacing: .1em; }
+
+    /* Large searchable directory */
+    .directory { color: var(--cream); background: var(--green); }
+    .directory .eyebrow { color: var(--gold); }
+    .directory .section-desc { color: rgba(245,241,232,.6); }
+    .search-panel { padding: 30px; color: var(--ink); background: var(--paper); border-radius: 14px; box-shadow: 0 26px 80px rgba(5,25,20,.22); }
+    .panel-status { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 11px; margin-bottom: 16px; padding-bottom: 14px; color: var(--muted); border-bottom: 1px solid var(--line); font-size: 11px; }
+    .panel-status strong { color: var(--green); font-weight: 600; }
+    .panel-status time { color: var(--green); font-family: Georgia, serif; letter-spacing: .02em; }
+    .panel-status .status-dot { width: 6px; height: 6px; background: var(--green-2); border-radius: 50%; box-shadow: 0 0 0 3px rgba(43,100,83,.13); }
+    .panel-status .status-sep { width: 1px; height: 10px; background: var(--line); }
+    .search-box { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 0 20px; background: var(--cream); border: 1px solid transparent; border-radius: 10px; transition: border-color .2s, box-shadow .2s; }
+    .search-box:focus-within { border-color: var(--green-2); box-shadow: 0 0 0 4px rgba(43,100,83,.08); }
+    .search-box > svg { flex: 0 0 auto; width: 22px; color: var(--orange); }
+    .search-box input { min-width: 0; flex: 1; color: var(--ink); background: transparent; border: 0; outline: 0; font-size: 16px; }
+    .search-box input::placeholder { color: #8a918b; }
+    .search-clear { display: none; flex: 0 0 auto; width: 28px; height: 28px; color: var(--muted); background: #e5e4dc; border: 0; border-radius: 50%; cursor: pointer; }
+    .search-clear.visible { display: grid; place-items: center; }
+    .search-hint { flex: 0 0 auto; padding: 3px 7px; color: var(--muted); background: var(--paper); border: 1px solid var(--line); border-radius: 5px; font-size: 9px; }
+    .filter-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 14px; }
+    .category-tabs { display: flex; flex-wrap: wrap; gap: 7px; min-width: 0; }
+    .category-tab { display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; color: var(--muted); background: transparent; border: 1px solid var(--line); border-radius: 99px; font-size: 12px; line-height: 1; white-space: nowrap; cursor: pointer; transition: color .2s, background .2s, border-color .2s; }
+    .category-tab span { display: grid; place-items: center; min-width: 19px; height: 19px; padding: 0 5px; color: var(--muted); background: var(--cream); border-radius: 99px; font-size: 9px; }
+    .category-tab:hover { color: var(--green); border-color: var(--green-2); }
+    .category-tab.active { color: var(--paper); background: var(--green); border-color: var(--green); }
+    .category-tab.active span { color: var(--green); background: var(--gold); }
+    .search-count { flex: 0 0 auto; color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .search-count strong { color: var(--green); font-weight: 600; }
+    .list-head { display: grid; grid-template-columns: 82px 80px minmax(190px, 1fr) minmax(220px, 1.25fr) 28px; gap: 15px; padding: 18px 8px 8px; color: rgba(190,205,240,.62); font-size: 9px; letter-spacing: .16em; }
+    .panel-note { margin-top: 14px; text-align: right; }
+    .source-note { font-size: 10px; color: var(--muted); }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .result-card { position: relative; display: flex; flex-direction: column; min-height: 250px; padding: 24px; background: var(--cream); border: 1px solid transparent; border-radius: 9px; transition: transform .25s, border-color .25s, box-shadow .25s; }
+    .result-card:hover { z-index: 1; border-color: rgba(23,63,53,.22); box-shadow: 0 16px 36px rgba(23,63,53,.1); transform: translateY(-5px); }
+    .result-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .result-category { display: inline-flex; align-items: center; gap: 6px; color: var(--orange); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+    .result-category::before { content: ""; width: 6px; height: 6px; background: currentColor; border-radius: 50%; }
+    .result-arrow { display: grid; place-items: center; width: 29px; height: 29px; color: var(--green); border: 1px solid var(--line); border-radius: 50%; font-size: 13px; transition: .2s; }
+    .result-card:hover .result-arrow { color: var(--paper); background: var(--orange); border-color: var(--orange); transform: rotate(45deg); }
+    .result-card h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; line-height: 1.55; }
+    .result-card > p { display: -webkit-box; margin-top: 9px; overflow: hidden; color: var(--muted); font-size: 12px; line-height: 1.8; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+    .result-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 18px; }
+    .result-tags span { padding: 3px 8px; color: var(--green-2); background: rgba(23,63,53,.06); border-radius: 4px; font-size: 9px; }
+    .empty-state { display: none; padding: 60px 20px; text-align: center; }
+    .empty-state.visible { display: block; }
+    .empty-state strong { display: block; margin-bottom: 7px; font-family: var(--serif); font-size: 22px; }
+    .empty-state p { color: var(--muted); font-size: 13px; }
+    .empty-state button { margin-top: 18px; padding: 8px 18px; color: var(--paper); background: var(--green); border: 0; border-radius: 99px; font-size: 12px; cursor: pointer; }
+    .directory-source { margin-top: 20px; color: rgba(245,241,232,.48); font-size: 10px; text-align: center; }
+
+    /* Follow and footer */
+    .follow-card { display: flex; align-items: center; justify-content: space-between; gap: 50px; padding: 48px 54px; background: #e8dfca; border-radius: 12px; }
+    .follow-card h2 { margin-bottom: 10px; font-family: var(--serif); font-size: clamp(28px, 3.6vw, 40px); font-weight: 600; }
+    .follow-card p { color: var(--muted); font-size: 13px; }
+    .follow-action { flex: 0 0 auto; text-align: center; }
+    .follow-action small { display: block; margin-top: 10px; color: var(--muted); font-size: 10px; }
+    .footer { padding: 46px 0 25px; color: var(--cream); background: #102f27; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-bottom: 34px; }
+    .footer .brand-mark { color: var(--green); background: var(--cream); }
+    .footer .brand-sub { color: rgba(245,241,232,.45); }
+    .footer-slogan { color: rgba(245,241,232,.58); font-family: var(--serif); font-size: 13px; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; border-top: 1px solid rgba(245,241,232,.12); color: rgba(245,241,232,.38); font-size: 9px; letter-spacing: .05em; }
+    .footer-bottom a:hover { color: var(--cream); }
+    .toast { position: fixed; z-index: 200; bottom: 28px; left: 50%; padding: 12px 22px; color: var(--paper); background: var(--green); border-radius: 99px; box-shadow: var(--shadow); font-size: 12px; opacity: 0; transform: translate(-50%, 18px); pointer-events: none; transition: .25s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1000px) {
+      .hero-grid { gap: 46px; }
+      .hero-card { min-height: 400px; padding: 36px; }
+      .about-grid { gap: 55px; }
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-tab { padding: 0 13px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: calc(100% - 36px); }
+      .section { padding: 76px 0; }
+      .nav { height: 76px; }
+      .brand-name { font-size: 18px; }
+      .brand-sub { font-size: 7px; }
+      .menu-toggle { display: block; }
+      .nav-search { width: 42px; padding: 0; justify-content: center; }
+      .nav-search span { display: none; }
+      .nav-links { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 24px; padding: 80px 38px; background: var(--cream); opacity: 0; visibility: hidden; transform: translateY(-12px); transition: .25s; }
+      .nav-links.open { opacity: 1; visibility: visible; transform: translateY(0); }
+      .nav-links a, .nav-links button { font-family: var(--serif); font-size: 27px; }
+      .hero { padding: 126px 0 64px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 52px; }
+      .hero h1 { font-size: clamp(46px, 13vw, 66px); }
+      .hero-card { width: min(92%, 390px); min-height: 390px; margin: 0 auto; }
+      .hero-note { right: -8px; }
+      .facts { grid-template-columns: repeat(2, 1fr); }
+      .fact { padding: 22px 16px; border-bottom: 1px solid var(--line); }
+      .fact:nth-child(2) { border-right: 0; }
+      .fact:nth-child(3), .fact:nth-child(4) { border-bottom: 0; }
+      .fact:first-child { padding-left: 16px; }
+      .about-grid { grid-template-columns: 1fr; gap: 34px; }
+      .about-lead { font-size: 20px; }
+      .section-head { display: block; margin-bottom: 32px; }
+      .section-desc { margin-top: 16px; }
+      .search-panel { margin-right: -6px; margin-left: -6px; padding: 18px; border-radius: 11px; }
+      .panel-status { margin-bottom: 13px; padding-bottom: 12px; gap: 6px 9px; font-size: 10px; }
+      .panel-status .status-sep { display: none; }
+      .search-box { min-height: 62px; padding: 0 15px; gap: 11px; }
+      .search-box > svg { width: 22px; }
+      .search-box input { font-size: 14px; }
+      .search-hint { display: none; }
+      .filter-bar { gap: 10px; margin-top: 12px; }
+      .category-tabs { flex: 1 1 auto; flex-wrap: nowrap; min-width: 0; gap: 6px; overflow-x: auto; padding-bottom: 3px; scrollbar-width: none; -webkit-overflow-scrolling: touch; mask-image: linear-gradient(90deg, #000 93%, transparent); }
+      .category-tabs::-webkit-scrollbar { display: none; }
+      .category-tab { flex: 0 0 auto; padding: 7px 12px; font-size: 11px; }
+      .search-count { flex: 0 0 auto; font-size: 10px; }
+      .list-head { display: none; }
+      .panel-note { margin-top: 10px; text-align: left; }
+      .results-grid { grid-template-columns: 1fr; }
+      .result-card { min-height: 220px; }
+      .follow-card { flex-direction: column; align-items: flex-start; padding: 36px 28px; gap: 28px; }
+      .follow-action { width: 100%; }
+      .footer-top, .footer-bottom { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 390px) {
+      .container { width: calc(100% - 28px); }
+      .brand { gap: 8px; }
+      .brand-mark { width: 38px; height: 38px; }
+      .brand-name { font-size: 16px; }
+      .hero-actions .btn { width: 100%; }
+      .principles { gap: 7px; }
+      .principle { padding: 17px 7px; }
+      .principle strong { font-size: 16px; }
+      .category-tab { padding: 6px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Starry night brand theme */
+    body {
+      position: relative;
+      isolation: isolate;
+      color: #f2f5ff;
+      background:
+        radial-gradient(ellipse at 14% 3%, rgba(44, 60, 137, .34), transparent 34%),
+        radial-gradient(ellipse at 92% 28%, rgba(27, 47, 119, .28), transparent 32%),
+        radial-gradient(ellipse at 45% 80%, rgba(20, 39, 102, .24), transparent 38%),
+        #02050f;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.3px),
+        radial-gradient(circle, rgba(176,195,255,.75) 0 .8px, transparent 1.1px),
+        radial-gradient(circle, rgba(255,255,255,.45) 0 .7px, transparent 1px);
+      background-position: 12px 20px, 52px 77px, 30px 42px;
+      background-size: 137px 137px, 191px 191px, 83px 83px;
+      opacity: .48;
+      pointer-events: none;
+    }
+    .header.scrolled { background: rgba(2, 5, 15, .86); box-shadow: 0 1px 0 rgba(177,193,255,.14); }
+    .brand-name { color: #f7f8ff; text-shadow: 0 0 18px rgba(210,220,255,.18); }
+    .brand-sub { color: #8f9abb; }
+    .brand-mark { color: #fff; background: linear-gradient(145deg, #283a78, #0b1334); border: 1px solid rgba(211,221,255,.36); box-shadow: 0 0 22px rgba(107,130,224,.25); }
+    .nav-links a, .nav-links button { color: #dce3fa; }
+    .nav-links a::after, .nav-links button::after { background: #dbe5ff; box-shadow: 0 0 8px #b7c8ff; }
+    .nav-search { color: #edf2ff; background: rgba(125,148,226,.1); border: 1px solid rgba(187,202,255,.25); }
+    .nav-search:hover { color: #071027; background: #edf2ff; }
+    .menu-toggle span { background: #edf2ff; }
+    .hero::before { background: radial-gradient(circle, rgba(85,105,201,.18), transparent 66%); }
+    .hero-kicker { color: #c8d4f8; background: rgba(19,30,66,.56); border-color: rgba(176,194,255,.2); }
+    .hero-kicker::before { background: #edf3ff; box-shadow: 0 0 12px #bdccff; }
+    .hero h1 { color: #f8f9ff; font-family: "STXingkai", "FZKai-Z03", "KaiTi", var(--serif); font-weight: 400; text-shadow: 0 0 24px rgba(197,210,255,.2); }
+    .hero h1 span { color: #f8f9ff; }
+    .hero-en { color: #b9c8f0; font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 23px; }
+    .hero-copy { color: #aeb9d5; }
+    .btn-primary { color: #071027; background: #f2f5ff; border-color: #f2f5ff; box-shadow: 0 0 24px rgba(191,205,255,.13); }
+    .btn-primary:hover { color: #071027; background: #cbd8ff; border-color: #cbd8ff; }
+    .btn-ghost { color: #e8edff; border-color: rgba(208,219,255,.36); }
+    .btn-ghost:hover { background: rgba(158,179,247,.1); }
+
+    .reference-visual { position: relative; width: min(100%, clamp(230px, 47vh, 460px)); margin: 0 auto; padding: clamp(12px, 2.2vh, 24px); isolation: isolate; }
+    .reference-visual::before { content: ""; position: absolute; z-index: -1; inset: 9%; background: radial-gradient(circle, rgba(94,116,221,.34), transparent 66%); filter: blur(22px); }
+    .reference-frame { position: relative; overflow: hidden; border: 1px solid rgba(195,209,255,.25); border-radius: 22px; box-shadow: 0 26px 80px rgba(0,0,0,.4), 0 0 50px rgba(78,100,197,.14); transform: rotate(1.5deg); }
+    .reference-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.08); border-radius: inherit; pointer-events: none; }
+    .reference-frame img { display: block; width: 100%; height: auto; }
+    .reference-orbit { position: absolute; z-index: 2; top: 43%; right: -1%; left: -1%; height: 31%; border: 1px solid rgba(224,233,255,.62); border-radius: 50%; transform: rotate(-17deg); pointer-events: none; }
+    .reference-orbit::before, .reference-orbit::after { content: ""; position: absolute; width: 10px; height: 10px; background: #edf3ff; border-radius: 50%; box-shadow: 0 0 16px #c7d5ff; }
+    .reference-orbit::before { top: 18%; left: 8%; }
+    .reference-orbit::after { right: 11%; bottom: 8%; width: 7px; height: 7px; }
+    .reference-star { position: absolute; z-index: 3; width: 27px; height: 27px; filter: drop-shadow(0 0 8px rgba(218,228,255,.7)); }
+    .reference-star::before, .reference-star::after { content: ""; position: absolute; top: 50%; left: 50%; background: #fff; transform: translate(-50%,-50%); }
+    .reference-star::before { width: 100%; height: 4px; clip-path: polygon(0 50%, 42% 35%, 50% 0, 60% 35%, 100% 50%, 60% 62%, 50% 100%, 40% 62%); }
+    .reference-star::after { width: 4px; height: 100%; clip-path: polygon(50% 0, 65% 40%, 100% 50%, 65% 60%, 50% 100%, 35% 60%, 0 50%, 35% 40%); }
+    .star-one { top: 8%; right: 3%; }
+    .star-two { bottom: 9%; left: 1%; width: 18px; height: 18px; }
+    .reference-caption { margin-top: 23px; color: #98a7ce; font-size: 9px; letter-spacing: .22em; text-align: center; }
+
+    .fact-bar { border-color: rgba(176,194,255,.14); background: rgba(6,12,31,.36); }
+    .fact { border-color: rgba(176,194,255,.14); }
+    .fact strong { color: #eef2ff; }
+    .fact span, .section-desc, .about-text { color: #9eabd0; }
+    .eyebrow { color: #b8c8f5; }
+    .section-title { color: #f1f4ff; text-shadow: 0 0 22px rgba(177,194,255,.09); }
+    .about-lead { color: #e8edff; }
+    .principle { background: rgba(16,27,61,.5); border-color: rgba(176,194,255,.16); }
+    .principle strong { color: #edf2ff; }
+    .principle span { color: #8f9fc7; }
+
+    .directory { background: transparent; border-top: 1px solid rgba(176,194,255,.1); border-bottom: 1px solid rgba(176,194,255,.1); }
+    .directory .eyebrow { color: #c5d2f6; }
+    .directory .section-desc, .directory-source { color: #8998bd; }
+    .search-panel { color: #edf2ff; background: rgba(8,16,41,.92); border: 1px solid rgba(177,194,255,.2); box-shadow: 0 26px 80px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.035); backdrop-filter: blur(18px); }
+    .panel-status { color: #8f9ec2; border-bottom-color: rgba(177,194,255,.14); }
+    .panel-status strong, .panel-status time { color: #e8eeff; }
+    .panel-status .status-dot { background: #8fa8f4; box-shadow: 0 0 0 3px rgba(119,145,230,.16), 0 0 10px rgba(143,168,244,.5); }
+    .panel-status .status-sep { background: rgba(177,194,255,.2); }
+    .search-box { background: rgba(2,7,22,.74); border-color: rgba(177,194,255,.17); }
+    .search-box:focus-within { border-color: #8fa8f4; box-shadow: 0 0 0 4px rgba(119,145,230,.1), 0 0 24px rgba(119,145,230,.08); }
+    .search-box > svg { color: #d7e2ff; }
+    .search-box input { color: #f4f6ff; }
+    .search-box input::placeholder { color: #7987aa; }
+    .search-clear { color: #dce5ff; background: #1c294f; }
+    .search-hint { color: #99a8ca; background: #111c3b; border-color: #28365c; }
+    .category-tab { color: #aab7d8; background: rgba(13,24,54,.54); border-color: rgba(177,194,255,.16); }
+    .category-tab span { color: #aab8dc; background: #182448; }
+    .list-head span { opacity: .85; }
+    .category-tab:hover { color: #f2f5ff; border-color: #7189d3; }
+    .category-tab.active { color: #071027; background: #edf2ff; border-color: #edf2ff; }
+    .category-tab.active span { color: #f3f6ff; background: #25396f; }
+    .search-count, .source-note { color: #8f9ec2; }
+    .list-head { color: rgba(186,201,236,.66); }
+    .search-count strong { color: #edf2ff; }
+    .list-head { border-bottom: 0; }
+    .result-card { background: linear-gradient(145deg, rgba(20,34,73,.78), rgba(10,19,45,.88)); border-color: rgba(177,194,255,.13); }
+    .result-card:hover { border-color: rgba(189,205,255,.48); box-shadow: 0 16px 42px rgba(0,0,0,.26), 0 0 26px rgba(86,109,194,.09); }
+    .result-category { color: #b9caf7; }
+    .result-arrow { color: #dbe5ff; border-color: rgba(190,205,255,.22); }
+    .result-card:hover .result-arrow { color: #081027; background: #edf2ff; border-color: #edf2ff; }
+    .result-card h3 { color: #f0f3ff; }
+    .result-card > p { color: #a3b0cf; }
+    .result-tags span { color: #b7c5e7; background: rgba(150,172,238,.09); }
+    .empty-state p { color: #94a2c4; }
+    .empty-state button { color: #071027; background: #edf2ff; }
+
+    .follow-card { background: transparent; border: 1px solid rgba(177,194,255,.24); box-shadow: none; }
+    .follow-card p, .follow-action small { color: #a6b3d3; }
+    .footer { background: rgba(1,4,12,.88); border-top: 1px solid rgba(177,194,255,.1); }
+    .footer .brand-mark { color: #f4f6ff; background: #1b2b5b; }
+    .toast { color: #081027; background: #f0f4ff; }
+
+    @media (max-width: 760px) {
+      .nav-links { background: #050a1b; }
+      .reference-visual { width: min(100%, 390px); padding: 16px; }
+      .reference-orbit { right: -2%; left: -2%; }
+      .fact { border-color: rgba(176,194,255,.14); }
+    }
+
+    /* Compact single-row archive */
+    .results-grid { display: block; border-top: 1px solid rgba(177,194,255,.14); }
+    .result-card {
+      display: grid;
+      grid-template-columns: 82px 80px minmax(190px, 1fr) minmax(220px, 1.25fr) 28px;
+      align-items: center;
+      gap: 15px;
+      min-height: 0;
+      padding: 13px 8px;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(177,194,255,.12);
+      border-radius: 0;
+      box-shadow: none;
+      transition: background .18s, padding .18s;
+    }
+    .result-card:hover {
+      z-index: auto;
+      padding-right: 12px;
+      padding-left: 12px;
+      background: rgba(126,151,230,.07);
+      border-color: rgba(177,194,255,.2);
+      box-shadow: none;
+      transform: none;
+    }
+    .result-category { margin: 0; white-space: nowrap; font-size: 9px; }
+    .result-date { color: #8e9fc6; font-family: Georgia, serif; font-size: 10px; letter-spacing: .02em; white-space: nowrap; }
+    .result-card h3 { min-width: 0; overflow: hidden; font-family: var(--sans); font-size: 13px; font-weight: 500; line-height: 1.5; text-overflow: ellipsis; white-space: nowrap; }
+    .result-card > p { display: block; min-width: 0; margin: 0; overflow: hidden; font-size: 11px; line-height: 1.5; text-overflow: ellipsis; white-space: nowrap; -webkit-line-clamp: unset; }
+    .result-tags { display: none; }
+    .result-arrow { width: 25px; height: 25px; justify-self: end; font-size: 12px; }
+    .result-card:hover .result-arrow { transform: none; }
+
+    @media (max-height: 560px) and (min-width: 901px) {
+      .hero h1 { line-height: 1.14; }
+      .hero-kicker { margin-bottom: 10px; }
+      .hero-actions { margin-top: 12px; }
+      .hero-copy { line-height: 1.65; }
+    }
+    @media (max-height: 700px) and (min-width: 901px) {
+      .hero-copy { line-height: 1.75; }
+      .reference-caption { margin-top: 12px; }
+      .hero-actions { gap: 10px; }
+    }
+    @media (max-width: 900px) {
+      .result-card { grid-template-columns: 72px 72px minmax(160px, 1fr) minmax(170px, 1fr) 26px; gap: 10px; }
+    }
+    @media (max-width: 760px) {
+      .result-card { grid-template-columns: 68px minmax(0, 1fr) 24px; gap: 9px; padding: 12px 3px; }
+      .result-card:hover { padding-right: 6px; padding-left: 6px; }
+      .result-card > p, .result-category { display: none; }
+      .result-card h3 { font-size: 12px; }
+      .result-date { font-size: 9px; }
+      .result-arrow { width: 23px; height: 23px; }
+      .search-summary { margin-bottom: 12px; }
+    }
+
+    /* University-style layout: utility bar, news board, footer columns */
+    .topbar { max-height: 38px; overflow: hidden; background: rgba(3,9,24,.62); border-bottom: 1px solid rgba(177,194,255,.1); backdrop-filter: blur(12px); transition: max-height .28s ease, opacity .2s ease; }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 38px; color: rgba(206,219,247,.58); font-size: 10px; letter-spacing: .03em; }
+    .topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; }
+    .topbar a { color: inherit; transition: color .2s; }
+    .topbar a:hover { color: #eaf0ff; }
+    .topbar-dot { width: 3px; height: 3px; background: rgba(177,194,255,.42); border-radius: 50%; }
+    .header.scrolled .topbar { max-height: 0; opacity: 0; }
+    .hero { padding-top: clamp(102px, 16vh, 204px); }
+
+    .news-section { padding-top: 62px; padding-bottom: 24px; }
+    .news-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+    .col-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-bottom: 13px; border-bottom: 1px solid rgba(177,194,255,.2); }
+    .col-head h2 { font-family: var(--serif); font-size: 25px; font-weight: 600; }
+    .col-head h2 small { display: block; margin-top: 6px; color: #8291b8; font-family: var(--sans); font-size: 8.5px; font-weight: 400; letter-spacing: .22em; }
+    .col-head-sub { margin-top: 30px; }
+    .col-more { color: #9fb0d8; font-size: 11px; white-space: nowrap; }
+    .col-more:hover { color: #edf2ff; }
+    .news-list { list-style: none; }
+    .news-row { display: grid; grid-template-columns: 78px minmax(0, 1fr) 14px; align-items: center; gap: 14px; padding: 14px 4px; border-bottom: 1px dashed rgba(177,194,255,.13); transition: padding .2s, background .2s; }
+    .news-row:hover { padding-right: 10px; padding-left: 10px; background: rgba(126,151,230,.06); }
+    .news-row time { color: #8b9bc2; font-family: Georgia, serif; font-size: 10px; }
+    .news-row .nt { min-width: 0; overflow: hidden; color: #e7edff; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+    .news-row .na { color: #6c7ba2; font-size: 11px; }
+    .news-row:hover .nt { color: #fff; }
+    .notice-list { list-style: none; }
+    .notice-list li { border-bottom: 1px dashed rgba(177,194,255,.13); }
+    .notice-link { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; padding: 13px 4px; color: #c6d1ee; background: none; border: 0; font-size: 12.5px; text-align: left; cursor: pointer; }
+    .notice-link span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .notice-link time { flex: 0 0 auto; color: #7e8db3; font-family: Georgia, serif; font-size: 9.5px; letter-spacing: .02em; }
+    .notice-link:hover { color: #fff; }
+    .quick-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .quick-links button, .quick-links a { padding: 7px 13px; color: #b3c1e4; background: transparent; border: 1px solid rgba(177,194,255,.18); border-radius: 99px; font-size: 11px; cursor: pointer; transition: color .2s, border-color .2s, background .2s; }
+    .quick-links button:hover, .quick-links a:hover { color: #071027; background: #edf2ff; border-color: #edf2ff; }
+    .quick-links a.quick-contact { color: #f0d9a4; border-color: rgba(231,184,95,.45); }
+    .quick-links a.quick-contact:hover { color: #2a1c04; background: #e7b85f; border-color: #e7b85f; }
+
+    .footer-cols { display: grid; grid-template-columns: 1.5fr 1fr 1.2fr; gap: 40px; padding: 26px 0 30px; border-top: 1px solid rgba(245,241,232,.1); }
+    .footer-cols h4 { margin-bottom: 12px; color: rgba(245,241,232,.92); font-size: 12px; font-weight: 600; letter-spacing: .08em; }
+    .footer-cols p, .footer-cols li { color: rgba(245,241,232,.6); font-size: 11.5px; line-height: 1.9; }
+    .footer-cols ul { list-style: none; }
+    .footer-cols li + li { margin-top: 4px; }
+    .footer-cols a { color: inherit; }
+    .footer-cols a:hover { color: var(--cream); }
+
+    @media (max-width: 900px) {
+      .news-grid { grid-template-columns: 1fr; gap: 34px; }
+      .footer-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
+    }
+    @media (max-width: 760px) {
+      .topbar-left span:last-child, .topbar .topbar-dot, .topbar-right a { display: none; }
+      .topbar-inner { justify-content: center; }
+      .hero { padding-top: 164px; }
+      .news-row { grid-template-columns: 66px minmax(0, 1fr) 12px; gap: 10px; }
+      .news-row .nt { font-size: 12px; }
+      .footer-cols { grid-template-columns: 1fr; gap: 22px; }
+    }
+
+    /* Background music toggle */
+    .sound-toggle { position: fixed; z-index: 150; right: 22px; bottom: 22px; display: grid; place-items: center; width: 46px; height: 46px; color: #cfdbff; background: rgba(8,16,41,.82); border: 1px solid rgba(177,194,255,.24); border-radius: 50%; cursor: pointer; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,.3); transition: color .2s, border-color .2s, transform .2s; }
+    .sound-toggle:hover { transform: translateY(-2px); color: #fff; border-color: rgba(189,205,255,.6); }
+    .sound-toggle[hidden] { display: none; }
+    .sound-toggle[aria-pressed="true"] { color: #f0d9a4; border-color: rgba(231,184,95,.5); }
+    .sound-bars { display: flex; align-items: flex-end; gap: 3px; height: 16px; }
+    .sound-bars i { width: 3px; height: 5px; background: currentColor; border-radius: 2px; transition: height .2s; }
+    .sound-toggle.playing .sound-bars i { animation: soundPulse 1.1s ease-in-out infinite; }
+    .sound-toggle.hint { color: #f0d9a4; border-color: rgba(231,184,95,.55); animation: soundHint 2.6s ease-in-out infinite; }
+    @keyframes soundHint {
+      0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,.3), 0 0 0 0 rgba(231,184,95,.34); }
+      55% { box-shadow: 0 10px 30px rgba(0,0,0,.3), 0 0 0 10px rgba(231,184,95,0); }
+    }
+    @media (prefers-reduced-motion: reduce) { .sound-toggle.hint { animation: none; } }
+    .sound-toggle.playing .sound-bars i:nth-child(2) { animation-delay: .18s; }
+    .sound-toggle.playing .sound-bars i:nth-child(3) { animation-delay: .36s; }
+    @keyframes soundPulse { 0%, 100% { height: 5px; } 50% { height: 15px; } }
+    @media (max-width: 760px) {
+      .sound-toggle { right: 14px; bottom: 14px; width: 42px; height: 42px; }
+      .toast { bottom: 72px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sound-toggle.playing .sound-bars i { animation: none; height: 12px; }
+    }
+
+    /* ============ Entry gate + dynamic star trails ============ */
+    .star-trails { position: fixed; z-index: -1; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .92; }
+    html.has-gate, html.has-gate body { overflow: hidden; }
+    html.has-gate main { opacity: 0; transform: translateY(16px); }
+    html.has-gate .header { opacity: 0; pointer-events: none; }
+    html.has-gate .sound-toggle { opacity: 0; pointer-events: none; }
+    .sound-toggle { transition: color .2s, border-color .2s, transform .2s, opacity .5s ease; }
+    main { transition: opacity 1.15s ease .12s, transform 1.2s cubic-bezier(.22,.8,.24,1) .12s; }
+
+    .gate {
+      position: fixed; z-index: 400; inset: 0;
+      display: grid; place-items: center; padding: 34px 22px 30vh;
+      text-align: center; overflow: hidden;
+      /* 背景完全透明，直接露出与正文一致的星空主题背景（渐变 + 星点 + 星轨画布） */
+      background: transparent;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+    .gate.is-out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .gate[hidden] { display: none !important; }
+    .gate[hidden] { display: none !important; }
+    .gate-bloom { position: absolute; top: 50%; left: 50%; width: 46vmax; height: 46vmax; margin: -23vmax 0 0 -23vmax; border-radius: 50%; background: radial-gradient(circle, rgba(196,214,255,.34), rgba(120,146,230,.12) 42%, transparent 64%); opacity: 0; pointer-events: none; }
+    .gate.is-out .gate-bloom { animation: gateBloom .95s ease-out forwards; }
+    @keyframes gateBloom { 0% { opacity: 0; transform: scale(.2); } 35% { opacity: .9; } 100% { opacity: 0; transform: scale(2.6); } }
+
+    .gate-inner { position: relative; display: grid; justify-items: center; transition: transform 1.1s cubic-bezier(.22,.8,.24,1), opacity .9s ease, filter .9s ease; }
+    .gate.is-out .gate-inner { opacity: 0; filter: blur(7px); transform: translateY(-26px) scale(1.035); }
+
+    .gate-logo { position: relative; width: 156px; height: 156px; margin-bottom: 38px; }
+    .gate-logo img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 26px; border: 1px solid rgba(196,210,255,.28); box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 54px rgba(88,112,208,.28); }
+    .gate-ring { position: absolute; inset: -33px; border: 1px solid rgba(196,210,255,.2); border-radius: 50%; transform: rotate(-18deg); animation: gateOrbit 34s linear infinite; }
+    .gate-ring::after { content: ""; position: absolute; top: -3px; left: 50%; width: 5px; height: 5px; margin-left: -2.5px; background: #eaf2ff; border-radius: 50%; box-shadow: 0 0 14px 3px rgba(190,210,255,.75); }
+    @keyframes gateOrbit { from { transform: rotate(-18deg); } to { transform: rotate(342deg); } }
+
+    .gate-kicker { color: #b9c8f0; font-size: 10px; letter-spacing: .32em; }
+    .gate-title { margin: 15px 0 9px; color: #f8f9ff; font-family: "STXingkai", "FZKai-Z03", "KaiTi", var(--serif); font-size: clamp(38px, 6.2vw, 60px); font-weight: 400; letter-spacing: .14em; text-indent: .14em; text-shadow: 0 0 32px rgba(197,210,255,.26); }
+    .gate-sub { color: #93a3c9; font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 21px; }
+    .gate-enter { display: inline-flex; align-items: center; gap: 12px; margin-top: 40px; padding: 15px 34px; color: #071027; background: #f2f5ff; border: 1px solid #f2f5ff; border-radius: 99px; font-size: 13px; letter-spacing: .16em; cursor: pointer; box-shadow: 0 0 30px rgba(191,205,255,.2); transition: transform .25s, box-shadow .3s, background .25s; }
+    .gate-enter:hover { transform: translateY(-2px); background: #fff; box-shadow: 0 0 46px rgba(200,215,255,.44); }
+    .gate-enter:focus-visible { outline: 2px solid #cbd8ff; outline-offset: 6px; }
+    .gate-enter svg { width: 15px; height: 15px; }
+    .gate-note { margin-top: 18px; color: #7f8db2; font-size: 11px; letter-spacing: .02em; }
+    .gate-skip { position: absolute; top: 22px; right: 26px; padding: 6px 12px; color: rgba(214,226,255,.55); background: none; border: 0; font-size: 11px; letter-spacing: .1em; cursor: pointer; transition: color .2s; }
+    .gate-skip:hover { color: #edf2ff; }
+
+    @keyframes gateIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    /* 基础态保持可见：万一动画不执行也不会空白；动画本身负责淡入上浮 */
+    .gate-inner > * { animation: gateIn .95s cubic-bezier(.2,.7,.2,1) both; }
+    .gate-logo { animation-delay: .08s; }
+    .gate-kicker { animation-delay: .22s; }
+    .gate-title { animation-delay: .34s; }
+    .gate-sub { animation-delay: .46s; }
+    .gate-enter { animation-delay: .58s; }
+    .gate-note { animation-delay: .7s; }
+    /* 兜底：若入场动画未执行（个别环境会冻结动画），2.4s 后强制显示全部内容 */
+    .gate.ready .gate-inner > * { animation: none; opacity: 1; transform: none; }
+
+    @media (max-width: 760px) {
+      .gate { padding: 28px 20px 20vh; }
+      .gate-logo { width: 118px; height: 118px; margin-bottom: 30px; }
+      .gate-ring { inset: -26px; }
+      .gate-title { letter-spacing: .1em; text-indent: .1em; }
+      .gate-sub { font-size: 18px; }
+      .gate-enter { margin-top: 32px; padding: 14px 30px; font-size: 12px; }
+      .gate-note { font-size: 10px; }
+      .gate-skip { top: 16px; right: 16px; }
+    }
+    /* 矮屏（横屏手机 / 小窗口）：收紧留白，避免内容被裁切 */
+    @media (max-height: 680px) {
+      .gate { padding: 24px 20px 6vh; }
+      .gate-logo { width: 104px; height: 104px; margin-bottom: 22px; }
+      .gate-ring { inset: -18px; }
+      .gate-title { font-size: clamp(30px, 7vw, 44px); margin: 10px 0 6px; }
+      .gate-enter { margin-top: 24px; padding: 12px 26px; }
+      .gate-note { margin-top: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .gate-inner > * { animation: none; opacity: 1; }
+      .gate-ring { animation: none; }
+      .gate.is-out .gate-bloom { animation: none; }
+    }
+  </style>
+  <script>
+    /* 每次打开都复位：关闭浏览器的滚动位置恢复，从开始界面重新进入 */
+    try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (error) {}
+    window.addEventListener('load', () => {
+      if (!location.hash) window.scrollTo(0, 0);
+    });
+  </script>
+</head>
+<body>
+  <canvas class="star-trails" id="star-trails" aria-hidden="true"></canvas>
+
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-note">
+    <div class="gate-bloom" aria-hidden="true"></div>
+    <div class="gate-inner">
+      <div class="gate-logo">
+        <img src="./微信图片_2026-10-26_224712_411.jpg" alt="梦晴工作室星空标志" width="156" height="156">
+        <span class="gate-ring" aria-hidden="true"></span>
+      </div>
+      <p class="gate-kicker">广州理工学院 · 学生创新创业团队</p>
+      <h1 class="gate-title" id="gate-title">梦晴工作室</h1>
+      <p class="gate-sub">Dream Sky Innovation Studio</p>
+      <button class="gate-enter" id="gate-enter" type="button">
+        <span>进入网站</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="gate-note" id="gate-note">进入后播放轻柔背景音乐 · 随时可在右下角关闭</p>
+    </div>
+    <button class="gate-skip" id="gate-skip" type="button">跳过</button>
+  </div>
+
+  <noscript>
+    <style>
+      .gate, .star-trails { display: none !important; }
+      html.has-gate, html.has-gate body { overflow: auto !important; }
+      html.has-gate main { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+
+  <header class="header" id="header">
+    <div class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-left">
+          <span>广州理工学院 · 惠州博罗校区创新创业基地</span>
+          <span class="topbar-dot" aria-hidden="true"></span>
+          <span>学生创新创业团队</span>
+        </div>
+        <div class="topbar-right">
+          <a href="#news">团队要闻</a>
+          <a href="#directory">资料库</a>
+          <a href="mailto:2842792147@qq.com">联系邮箱</a>
+          <span class="topbar-dot" aria-hidden="true"></span>
+          <span>公众号：梦晴-育新联萌</span>
+        </div>
+      </div>
+    </div>
+    <nav class="nav container" aria-label="主导航">
+      <a class="brand" href="#home" aria-label="梦晴工作室首页">
+        <span class="brand-mark"><span>梦</span></span>
+        <span><span class="brand-name">梦晴工作室</span><span class="brand-sub">DREAM SKY INNOVATION STUDIO</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">工作室简介</a></li>
+        <li><a href="#news">团队要闻</a></li>
+        <li><button type="button" data-nav-category="members">成员介绍</button></li>
+        <li><button type="button" data-nav-category="awards">获奖情况</button></li>
+        <li><button type="button" data-nav-category="activities">参与活动</button></li>
+        <li><button type="button" data-nav-category="meetings">会议纪实</button></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="nav-search" id="nav-search" type="button" aria-label="搜索团队资料">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><span>搜索资料</span>
+        </button>
+        <button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-kicker">广州理工学院 · 创新创业团队</div>
+          <h1>梦随晴光起，<br><span>共绘青春蓝图。</span></h1>
+          <p class="hero-en">Dream Sky Innovation Studio</p>
+          <p class="hero-copy">梦晴工作室由吴梦琪、雷子晴于 2025 年 3 月共同创立，同年入驻惠州博罗校区创新创业基地。团队以科技为核心驱动力，聚焦 AIGC 教育创新、科创竞赛孵化与成果转化。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#about">了解工作室 <span>→</span></a>
+            <button class="btn btn-ghost" type="button" data-open-category="members">查看成员介绍</button>
+          </div>
+        </div>
+        <div class="reference-visual" aria-label="梦晴工作室星空品牌标志">
+          <div class="reference-frame">
+            <img src="./微信图片_2026-10-26_224712_411.jpg" alt="梦晴工作室 Dream Sky Innovation 星空标志" width="500" height="500">
+          </div>
+          <div class="reference-orbit" aria-hidden="true"></div>
+          <span class="reference-star star-one" aria-hidden="true"></span>
+          <span class="reference-star star-two" aria-hidden="true"></span>
+          <p class="reference-caption">DREAM SKY · INNOVATION · EDUCATION</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="fact-bar">
+      <div class="container facts">
+        <div class="fact"><strong>2025.03</strong><span>工作室创立时间</span></div>
+        <div class="fact"><strong>2 位创始人</strong><span>吴梦琪 · 雷子晴</span></div>
+        <div class="fact"><strong>13 人初创团队</strong><span>据 2025 年团队介绍文章</span></div>
+        <div class="fact"><strong>跨学科协作</strong><span>教育 · 中文 · 计算机等</span></div>
+      </div>
+    </div>
+
+    <section class="section news-section" id="news">
+      <div class="container news-grid reveal">
+        <div class="news-main">
+          <div class="col-head">
+            <h2>团队要闻<small>NEWS &amp; UPDATES</small></h2>
+            <a class="col-more" href="#directory">全部 30 篇 →</a>
+          </div>
+          <ul class="news-list" id="news-list"></ul>
+        </div>
+        <aside class="notice-col">
+          <div class="col-head">
+            <h2>通知公告<small>NOTICE</small></h2>
+          </div>
+          <ul class="notice-list">
+            <li><button type="button" class="notice-link" data-open-category="activities"><span>秋季招新与岗位招募安排</span><time datetime="2026-09-20">2026.09.20</time></button></li>
+            <li><button type="button" class="notice-link" data-open-category="activities"><span>“心之所向，梦里原乡”公益活动</span><time datetime="2026-09-12">2026.09.12</time></button></li>
+            <li><button type="button" class="notice-link" data-open-category="activities"><span>夏令营生活老师合作招募</span><time datetime="2026-04-22">2026.04.22</time></button></li>
+          </ul>
+          <div class="col-head col-head-sub"><h2>快速入口<small>QUICK ACCESS</small></h2></div>
+          <div class="quick-links">
+            <button type="button" data-open-category="members">成员介绍</button>
+            <button type="button" data-open-category="awards">获奖情况</button>
+            <button type="button" data-open-category="meetings">会议纪实</button>
+            <button type="button" data-open-category="activities">参与活动</button>
+            <a class="quick-contact" href="#contact">联系我们</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-grid reveal">
+        <div>
+          <span class="eyebrow">About us · 工作室简介</span>
+          <h2 class="section-title">以科技智慧，<br>赋能教育未来。</h2>
+        </div>
+        <div>
+          <p class="about-lead">从学术研究到竞赛实践，<br>让每一个创意在协作中落地。</p>
+          <p class="about-text">工作室以《AIGC 赋能虚拟教育场景构建与沉浸式学习体验理论研究》为核心项目，围绕科创竞赛孵化与成果转化，开展学术研究、方案优化与赛事申报。成员项目覆盖 AIGC 教育场景、传统文化数字化、心理科普、外语应用等方向。</p>
+          <p class="about-text" style="margin-top:14px;">团队倡导平等协作、互助共进，通过头脑风暴、分工协作与“备赛—参赛—复盘”的实践路径，让成员在真实项目中提升专业能力。</p>
+          <div class="principles">
+            <div class="principle"><strong>教育为核</strong><span>EDUCATION</span></div>
+            <div class="principle"><strong>人文为魂</strong><span>HUMANITY</span></div>
+            <div class="principle"><strong>技术为翼</strong><span>TECHNOLOGY</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section directory" id="directory">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><span class="eyebrow">Team archive · 团队资料库</span><h2 class="section-title">搜索梦晴的每一步成长。</h2></div>
+          <p class="section-desc">输入姓名、奖项、项目或活动关键词，也可以按分类浏览已收录的公开资料。</p>
+        </div>
+
+        <div class="search-panel reveal">
+          <div class="panel-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>已收录 <strong id="article-count">0</strong> 篇原创文章</span>
+            <span class="status-sep" aria-hidden="true"></span>
+            <span>最后更新 <time id="archive-updated" datetime="2026-10-27">2026.10.27</time></span>
+          </div>
+          <form class="search-box" id="search-form" role="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+            <input id="search-input" type="search" placeholder="搜索成员、竞赛、奖项、活动……" autocomplete="off" aria-label="搜索团队资料">
+            <button class="search-clear" id="search-clear" type="button" aria-label="清空搜索">×</button>
+            <span class="search-hint">Ctrl / ⌘ K</span>
+          </form>
+          <div class="filter-bar">
+            <div class="category-tabs" role="group" aria-label="资料分类">
+              <button class="category-tab active" type="button" data-category="all">全部 <span id="count-all">0</span></button>
+              <button class="category-tab" type="button" data-category="members">成员介绍 <span id="count-members">0</span></button>
+              <button class="category-tab" type="button" data-category="awards">获奖情况 <span id="count-awards">0</span></button>
+              <button class="category-tab" type="button" data-category="activities">参与活动 <span id="count-activities">0</span></button>
+              <button class="category-tab" type="button" data-category="meetings">会议纪实 <span id="count-meetings">0</span></button>
+            </div>
+            <p class="search-count" id="search-status" aria-live="polite">共 <strong>0</strong> 条</p>
+          </div>
+          <div class="list-head" aria-hidden="true">
+            <span>分类</span><span>发布日期</span><span>标题</span><span>内容摘要</span><span></span>
+          </div>
+          <div class="results-grid" id="results-grid"></div>
+          <div class="empty-state" id="empty-state">
+            <strong>没有找到相关资料</strong>
+            <p>可以尝试成员姓名、赛事简称或“公益”“会议”等关键词。</p>
+            <button id="reset-search" type="button">查看全部资料</button>
+          </div>
+          <p class="panel-note"><span class="source-note">公众号「梦晴-育新联萌」30 篇原创内容 · 按发布时间从晚到早排列</span></p>
+        </div>
+        <p class="directory-source">资料依据梦晴工作室及广州理工学院公开发布内容整理；成员信息与奖项表述以原始文章为准。</p>
+      </div>
+    </section>
+
+    <section class="section" id="follow">
+      <div class="container">
+        <div class="follow-card reveal">
+          <div>
+            <span class="eyebrow">WeChat · 关注公众号</span>
+            <h2>在公众号，了解更多团队动态。</h2>
+            <p>公开文章标注的公众号名称为「梦晴-育新联萌」，可复制后前往微信搜索。</p>
+          </div>
+          <div class="follow-action">
+            <button class="btn btn-primary" id="copy-btn" type="button">复制公众号名称</button>
+            <small>梦晴-育新联萌</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <a class="brand" href="#home"><span class="brand-mark"><span>梦</span></span><span><span class="brand-name">梦晴工作室</span><span class="brand-sub">DREAM SKY INNOVATION STUDIO</span></span></a>
+        <p class="footer-slogan">以实践促成长，以热爱赴山海。</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h4>关于工作室</h4>
+          <p>广州理工学院学生创新创业团队，2025 年 3 月创立并入驻惠州博罗校区创新创业基地，聚焦 AIGC 教育创新、科创竞赛孵化与成果转化。</p>
+        </div>
+        <div>
+          <h4>栏目导航</h4>
+          <ul>
+            <li><a href="#about">工作室简介</a></li>
+            <li><a href="#news">团队要闻</a></li>
+            <li><a href="#directory">团队资料库</a></li>
+            <li><a href="#follow">关注公众号</a></li>
+          </ul>
+        </div>
+        <div id="contact">
+          <h4>联系我们</h4>
+          <ul>
+            <li>公众号：梦晴-育新联萌</li>
+            <li><a href="mailto:2842792147@qq.com">邮箱：2842792147@qq.com</a></li>
+            <li>地址：惠州博罗校区创新创业基地</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> 梦晴工作室 · 资料来源于公开发布内容</span><a href="#home">回到顶部 ↑</a></div>
+    </div>
+  </footer>
+  <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" aria-label="开启背景音乐" title="背景音乐" hidden>
+    <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+  <audio id="bgm" src="./bgm.mp3" loop preload="metadata"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite">已复制公众号名称</div>
+
+  <script type="application/json" id="articles-fallback">{"schema":1,"updated_at":"2026-10-27T22:00","source":"梦晴-育新联萌","biz":"Mzk5MDA5NTkxMQ==","article_count":30,"articles":[{"category":"members","type":"成员介绍","title":"新成员介绍｜少年怀热忱，同行启新章","description":"黄耀锋、杨湘源、林立杨、黄波霖、余熙彤等新成员亮相，为团队带来文字、技术与设计等多元素养。","tags":["新成员","团队协作","多元专业"],"keywords":"黄耀锋 杨湘源 林立杨 黄波霖 余熙彤 新成员 电子信息 数字媒体 机械","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486292&idx=1&sn=03c74450ef304c7c8e5522d65bea84e8&chksm=c4949d5c1c5f3e926c8c6ed0650459051c71b057f94f7a9cbc9e2c067237d633507236750801#rd","date":"2026-10-26T08:49","id":"2247486292-1"},{"category":"meetings","type":"会议纪实","title":"新学期工作部署会议","description":"围绕工作室运营、科研项目、学科竞赛、业务拓展与招新规划，明确新学期重点方向。","tags":["新学期","工作会议","竞赛规划"],"keywords":"新学期 会议 工作 部署 科研 竞赛 公益 招新","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486279&idx=1&sn=0c8958e1a12ac55d20bb124303891179&chksm=c4e356019cfca12b6b093c493770f5de0a2227783196481e80a34e8e4d007e81d8f2c5e43696#rd","date":"2026-10-10T16:35","id":"2247486279-1"},{"category":"activities","type":"参与活动","title":"以赛逐梦｜工作室招新活动","description":"面向广州理工学院热爱创新、乐于实践的在校生，介绍团队文化、项目方向、竞赛经历与成长收获。","tags":["团队招新","以赛促学","共同成长"],"keywords":"招新 加入 报名 广州理工学院 团队 竞赛","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486266&idx=1&sn=5448a4dd12ea399ed250d0a758f0eebf&chksm=c4a7a00ff4933e59aa519a4ede8d84820ffce9ecc3e87bdf46e338df5f4edc4bea1c34ca48bc#rd","date":"2026-09-20T16:57","id":"2247486266-1"},{"category":"activities","type":"参与活动","title":"“心之所向，梦里原乡”｜开学季公益助农","description":"发起开学季公益助农活动，通过转发助力、助农值兑换和线下摆摊招募，为家乡农特产拓宽销路。","tags":["公益助农","开学季","惠州校区"],"keywords":"心之所向 梦里原乡 助农 公益 活动 助力 助农值 惠州校区 陈文欣 招新","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486247&idx=1&sn=300c1abc526e36f0ef172b4d1bf0b49c&chksm=c4f7624645a5bb3cad530d9934e5754c17530aced6683041933c7d3e934a846c988d0dbff84e#rd","date":"2026-09-12T16:41","id":"2247486247-1"},{"category":"awards","type":"获奖情况","title":"表彰大会｜再揽多项竞赛桂冠","description":"召开工作室表彰大会，集中回顾成员在计算机设计大赛、三创赛、燕兴杯等赛事中的成果并颁发荣誉。","tags":["表彰大会","竞赛成果","多项获奖"],"keywords":"表彰大会 喜报 桂冠 获奖 竞赛 证书 计算机设计大赛 三创赛 燕兴杯","url":"https://weixin.sogou.com/weixin?type=2&query=%E6%A2%A6%E6%99%B4%E5%B7%A5%E4%BD%9C%E5%AE%A4%E8%A1%A8%E5%BD%B0%E5%A4%A7%E4%BC%9A%20%E5%A4%9A%E9%A1%B9%E6%A1%82%E5%86%A0","date":"2026-06-04T12:00","id":"manual-a8ba3eac52"},{"category":"meetings","type":"会议纪实","title":"凝心备赛｜竞赛筹备工作会议","description":"聚焦大创赛、国创赛申报节点、项目打磨、团队分工和答辩筹备，明确全流程备赛计划。","tags":["备赛会议","大创赛","国创赛"],"keywords":"凝心备赛 聚力攻坚 大创 国创 竞赛 筹备 材料 答辩","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486211&idx=1&sn=975940966c1e3a5ceddcd4433d0d68de&chksm=c4ad4c9a9e2b726b0051c2f0e7b3f4be215a3c0dc5c6248847b28ef5f99a682928e43c448cbb#rd","date":"2026-05-08T21:22","id":"2247486211-1"},{"category":"activities","type":"参与活动","title":"黄埔领越特训营｜夏令营生活老师招募","description":"与黄埔领越特训营合作开展夏令营生活老师招募，为成员提供暑期带队实践与锻炼机会。","tags":["对外合作","暑期实践","岗位招募"],"keywords":"黄埔 领越 特训营 夏令营 生活老师 招募 暑期 实践 合作","url":"https://weixin.sogou.com/weixin?type=2&query=%E6%A2%A6%E6%99%B4%E5%B7%A5%E4%BD%9C%E5%AE%A4%20%E9%BB%84%E5%9F%94%E9%A2%86%E8%B6%8A%E7%89%B9%E8%AE%AD%E8%90%A5%20%E5%A4%8F%E4%BB%A4%E8%90%A5%E7%94%9F%E6%B4%BB%E8%80%81%E5%B8%88","date":"2026-04-22T12:00","id":"manual-65daab9126"},{"category":"members","type":"成员介绍","title":"雷子晴｜核心创始人","description":"汉语言文学专业，工作室核心创始人，在学业、科创、校园媒体与公益实践中持续探索。","tags":["创始人","汉语言文学","公益实践"],"keywords":"雷子晴 负责人 创始人 燕兴杯 璟胜杯 捐书 助农","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486183&idx=1&sn=27946383f376cd04c82be00c50ccee3a&chksm=c420aad4eda3c1c9b98ebfc93cea0ce572d316941fb68e13fb64dd5cd1ea9141a1bc5602d6d1#rd","date":"2026-04-11T16:27","id":"2247486183-1"},{"category":"members","type":"成员介绍","title":"吴梦琪｜核心创始人","description":"汉语言文学专业，负责团队领航与项目实践，在学科竞赛、创新创业、志愿服务和学生工作中多维成长。","tags":["创始人","汉语言文学","AIGC"],"keywords":"吴梦琪 负责人 全国大学生教育教学能力大赛 志愿服务","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486182&idx=1&sn=0ed3efb8c0c95ece41cb3101ac54b501&chksm=c42f8bfa9facf3d045334ce38aa6cde54d620580fa60cd15740e93a7b67937ca357708706ac7#rd","date":"2026-04-11T16:26","id":"2247486182-1"},{"category":"meetings","type":"会议纪实","title":"新学期会议｜梦随晴光起，共绘青春蓝图","description":"2026 年 3 月 8 日新学期第一次会议，复盘上一学期成果，明确国创赛主线和新阶段项目规划。","tags":["新学期","第一次会议","国创赛"],"keywords":"新学期 第一次会议 2026年3月8日 国创赛 复盘 规划 李嘉涵","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486104&idx=1&sn=973ed8bd41c4a283d5af6bf507be4c82&chksm=c4ae4f1c40dcc4500fed49cdae7e7bb39aa52c562ee53a58f569e33e76040c7c5d0b43a965fd#rd","date":"2026-03-17T17:52","id":"2247486104-1"},{"category":"members","type":"成员介绍","title":"逐梦同频｜一群人的青春，比单人的闪耀更热烈","description":"成员介绍第三期，韦昌铉、张梦雪、李嘉涵、陈文欣等成员讲述专业背景、性格特长与团队分工。","tags":["成员介绍三","新成员","团队协作"],"keywords":"逐梦同频 韦昌铉 张梦雪 李嘉涵 陈文欣 机制 中文 成员介绍三","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485983&idx=1&sn=0ea91537034e3287d6ceac8786d18775&chksm=c46baa11a6fb3546f201f5c7eb0b606de418fab3673e7b60bde9cdb452954a57d7d375093da3#rd","date":"2026-01-11T12:00","id":"2247485983-1"},{"category":"activities","type":"参与活动","title":"梦晴三百天｜首聚、庆生、启新程","description":"纪念工作室成立 300 天与育新联萌团队成立 400 天，记录首次团建、庆生和团队成长回顾。","tags":["团队团建","300天","里程碑"],"keywords":"三百天 团建 庆生 300天 400天 育新联萌 张梦雪","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485960&idx=1&sn=7569be8366754ab6d5a3480994014d0f&chksm=c46fb4feedffd8153c570c69bc98503af6755436edc7cd4bff24b87e652d89d388fec4f5ab87#rd","date":"2026-01-04T16:24","id":"2247485960-1"},{"category":"activities","type":"参与活动","title":"兵心映橙红｜河源直播助农活动","description":"团队参与和平贝墩镇脐橙直播助农，承担账号筹备、直播执行与平台运营，两天销售脐橙 1500 多斤。","tags":["乡村振兴","直播助农","百千万工程"],"keywords":"兵心映橙红 助农 脐橙 河源 和平 贝墩 直播 退役军人 凌新岳","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485938&idx=1&sn=cf0495b2bb5be75bb73c32df8d1a33b8&chksm=c44975c84e59a40571bf8038b90bbea6c0a9e1398c39531f23a427b8fdb62162f751476cba3f#rd","date":"2025-12-31T12:26","id":"2247485938-1"},{"category":"meetings","type":"会议纪实","title":"第六次会议｜共探直播新航道","description":"围绕电商直播平台选择、内容策略、账号运营和品牌构建展开讨论，明确下一阶段发展方向。","tags":["内部会议","电商直播","品牌建设"],"keywords":"第六次 会议 直播 新媒体 电商 品牌 林楚媛 工作证","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485906&idx=1&sn=f696d79714e980c5af89e2193229ca34&chksm=c473a4702ab9317c93e9fb1c43db6ad1425a20a6243c74c8b17d1fae7c79a298871fc603ad48#rd","date":"2025-12-19T22:00","id":"2247485906-1"},{"category":"meetings","type":"会议纪实","title":"第五次会议｜路演筹备与 PPT 精研","description":"在导师指导下打磨项目商业模式、营销策略和路演 PPT，明确任务分工与优化方向。","tags":["内部会议","路演筹备","PPT打磨"],"keywords":"第五次 会议 路演 PPT 商业模式 营销 导师 张梦雪","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485844&idx=1&sn=4cd81330cddf8539bd2a39bad336f2d3&chksm=c4383e751b8bfbd93d965be44abfee69c3e225d98dbf8b7e004a72efbaf8bb6cb44c7f523752#rd","date":"2025-12-13T20:43","id":"2247485844-1"},{"category":"activities","type":"参与活动","title":"DR 钻戒品牌探访与创意实践","description":"团队走进 DR 钻戒门店，了解品牌理念与情感营销，并将探访灵感联动到智能戒指项目讨论。","tags":["品牌探访","创意实践","智能戒指"],"keywords":"DR 钻戒 探店 品牌 活动 智能戒指 2025年11月26日","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485581&idx=1&sn=d9883972b61ced75d56d285ca1f6d152&chksm=c4181feb38e6d25d1911baff9fb2353369ffc9c7c901496c2898a257b4c58f64fb9fa9a46016#rd","date":"2025-12-11T14:19","id":"2247485581-1"},{"category":"awards","type":"获奖情况","title":"多项竞赛获奖汇总","description":"公开喜报集中展示计算机设计大赛校赛一、二等奖，图书馆文创大赛优秀奖，“挑战杯”院级推优与“燕兴杯”省级复赛优秀奖。","tags":["计算机设计大赛","燕兴杯","图书馆文创"],"keywords":"获奖 喜报 一等奖 二等奖 燕兴杯 图书馆文创 挑战杯 院级推优 吴梦琪 雷子晴 吴丹璇 黄英豪","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247485505&idx=1&sn=137cab0417f724978779e4042fac6e03&chksm=c469573f69da09e853993db8c0599c5e171ca632f87c8eb48ad4dda0348d50108f5cef091033#rd","date":"2025-12-10T08:27","id":"2247485505-1"},{"category":"activities","type":"参与活动","title":"研学新旅程｜赴澳门大学研学之旅","description":"成员赴澳门大学参加“人文社科”专题研学，学习广告传播、大湾区发展与未来领导力课程并完成小组汇报。","tags":["澳门大学","研学","大湾区"],"keywords":"研学 澳门大学 许诗雅 广告 传播 大湾区 领导力 张文瑜 李振国 邓宇明 结业","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247484313&idx=1&sn=6857a9d9158409e0b291cef62dc89d06&chksm=c441127633e4feba4b57511e80d106f7f2472002959cf029cf80ce1dcf40584c9e71f691d76e#rd","date":"2025-12-09T09:03","id":"2247484313-1"},{"category":"meetings","type":"会议纪实","title":"第四次会议｜项目进展与阶段复盘","description":"梳理项目关键节点、数据整理、技术开发与文档撰写进展，反思短板并制定下一阶段计划。","tags":["内部会议","项目复盘","阶段总结"],"keywords":"第四次 会议 项目 进展 复盘 数据 技术 文档 韦昌铉","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247484068&idx=1&sn=4aa6046d151daf788bd3ce562d148c84&chksm=c47d7ce8cc7b3c05cdf88e9e7091905046f95349eb2f214b2900a1c7986b4644ceab116adadb#rd","date":"2025-12-03T00:57","id":"2247484068-1"},{"category":"activities","type":"参与活动","title":"智戒爱联 × 育新联萌｜帽峰创谷路演","description":"工作室两个项目参与 2025 年秋季帽峰创谷入驻选拔赛，完成项目展示、现场答辩与赛后复盘。","tags":["帽峰创谷","项目路演","创新创业"],"keywords":"帽峰创谷 路演 智戒爱联 育新联萌 智能穿戴 国际教育 选拔赛","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247484033&idx=1&sn=938f89060fd7fdffa8c4608971461d1a&chksm=c4c1b8123273503adc80b28b2d22a4efa292f35baea487246b25157764f3ccf84cec801d2f26#rd","date":"2025-11-26T21:50","id":"2247484033-1"},{"category":"awards","type":"获奖情况","title":"第十六届“三创赛”｜校赛二等奖","description":"梦晴工作室—育新联萌团队项目获全国大学生电子商务“创新、创意及创业”挑战赛校赛二等奖。","tags":["三创赛","校赛二等奖","电子商务"],"keywords":"三创赛 电子商务 创新创意创业 校赛 二等奖 育新联萌","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483937&idx=1&sn=b39851a4ee3c3e7f1f72f44b949aa62e&chksm=c421b9561917c292abfd19832fdbfd9d1383d7fd3fe2d81b3274cd56aced1afa0c56af87d04c#rd","date":"2025-11-23T17:02","id":"2247483937-1"},{"category":"activities","type":"参与活动","title":"书暖指尖，爱递远方｜校园公益捐书","description":"工作室参与经济管理学院公益捐书活动，承担物料设计、宣传动员、书籍整理，并带头捐赠书籍。","tags":["公益实践","书籍捐赠","物料设计"],"keywords":"书暖指尖 爱递远方 捐书 公益 留守儿童 雷子晴 吴丹璇 韦昌铉","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483926&idx=1&sn=93a45a4ca5128dbbdf6b2c690f0f44b2&chksm=c44cc03ff476f1d7f93e71d35c61abb6e8eb465e9053a857da9951bcf68279611e73d60b101d#rd","date":"2025-11-16T17:05","id":"2247483926-1"},{"category":"meetings","type":"会议纪实","title":"第三次线下会议｜项目路演与模拟答辩","description":"围绕项目研讨、技能打磨与发展规划开展路演和答辩训练，在复盘中提升团队协作与表达能力。","tags":["团队会议","路演答辩","项目研讨"],"keywords":"第三次 线下 会议 路演 答辩 PPT 2025年10月20日","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483906&idx=1&sn=55a1e677864f1d1c58cdb938fa50648b&chksm=c4ee48765e522dc7a55ac26e247df78676e544797d55a88365e617c3ad74973aeb3981483dcd#rd","date":"2025-11-15T19:38","id":"2247483906-1"},{"category":"members","type":"成员介绍","title":"遇见我们的引领者｜工作室负责人","description":"工作室负责人吴梦琪与联合负责人雷子晴介绍各自的工作理念、竞赛经历与团队愿景。","tags":["负责人","吴梦琪","雷子晴"],"keywords":"遇见 引领者 负责人 吴梦琪 雷子晴 规划 执行力 林楚媛","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483886&idx=1&sn=c8961d8a3c91514a47bcccf615ed32fc&chksm=c4e29300ed90e0a38a4a5f3f396c8cced02ad778cbeb9ed6c05e9f54d48ac93615cb762fe15a#rd","date":"2025-11-08T16:24","id":"2247483886-1"},{"category":"members","type":"成员介绍","title":"团队成员介绍（下）","description":"认识张思韵、李洁婷、林楚媛、刘冰雨、黄英豪，了解教育、人文与技术跨学科协作的团队构成。","tags":["跨学科","内容创作","技术"],"keywords":"张思韵 李洁婷 林楚媛 刘冰雨 黄英豪 计算机 策划 PPT 推文","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483865&idx=1&sn=f34f660c82402f4d9edff05371152d1b&chksm=c43efb1d6ccd57cb1f4a7f1cf51e6994af3553e087ac0608d08627b5ecba5745a38497c28db3#rd","date":"2025-11-02T22:00","id":"2247483865-1"},{"category":"members","type":"成员介绍","title":"团队成员介绍（上）","description":"认识吴丹璇、梁海琳、许诗雅、苏钰婷、杨羽凡、姚紫馨，了解不同成员的专业背景与团队分工。","tags":["PPT推文","策划","答辩"],"keywords":"吴丹璇 梁海琳 许诗雅 苏钰婷 杨羽凡 姚紫馨 小学教育 中文","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483860&idx=1&sn=eea25d9db9a0439f0435c9523cfac250&chksm=c4de79c1f5f63e201844724dcbb6ca0b0183f1fce08ceea1287e19530b1820ea7ec1c7a1ce08#rd","date":"2025-10-31T15:50","id":"2247483860-1"},{"category":"meetings","type":"会议纪实","title":"项目打磨记｜从 PPT 到路演","description":"11 人参与的赛前打磨会，从内容逻辑、视觉呈现与路演表达三方面逐页“挑刺”，把展示从将就改到精致。","tags":["项目打磨","路演","PPT"],"keywords":"项目打磨记 PPT 路演 升级 内容逻辑 视觉 答辩 讲稿 刘冰雨","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483853&idx=1&sn=73639982508d33808933af2d29428c76&chksm=c4d3874558a4dfa4c5ca925db8ec65ecbd40cdc8a981fcad5255a62b0a8973690ca0fd77b362#rd","date":"2025-10-29T18:26","id":"2247483853-1"},{"category":"activities","type":"参与活动","title":"创新创业孵化团队汇报交流座谈会","description":"2025 年 5 月 29 日，工作室展示 AIGC 教育创新成果，围绕项目运营、技术研发与成果转化展开交流。","tags":["成果汇报","资源对接","2025.05"],"keywords":"座谈会 汇报 交流 AIGC 创新创业学院 惠州博罗校区","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483831&idx=1&sn=a65efa31c79a4cfd9d52f5d8806828c8&chksm=c46b808fb2383a96215a41a9259bfa0b204abeba255c67c0505b7da8eed12a221b5136f7d7ee#rd","date":"2025-10-26T03:04","id":"2247483831-1"},{"category":"activities","type":"参与活动","title":"加入梦晴工作室｜早期招新","description":"面向广州理工学院惠州校区招募 PPT 推文、策划与答辩岗位，介绍赛事成果、团队平台和成长路径。","tags":["团队招新","岗位招募","AIGC教育"],"keywords":"加入 招新 PPT 推文岗 策划岗 答辩岗 惠州校区 简历 2025","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483709&idx=1&sn=865a98c385b3a19d07e1da67091bbc4b&chksm=c490e7e45b88aeee454e1d5d663b28533309e64765778bf701e71d5e4a28f01ad4a6fb6cbc6d#rd","date":"2025-09-11T17:58","id":"2247483709-1"},{"category":"members","type":"成员介绍","title":"探索 AIGC 教育新蓝海，“梦晴”扬帆启航","description":"梦晴工作室早期团队介绍，记录工作室—育新联萌团队的创立、AIGC 教育方向、已有成果与未来规划。","tags":["团队起源","AIGC教育","项目介绍"],"keywords":"探索 AIGC 教育 新蓝海 扬帆启航 团队 初亮相 育新联萌 2024年11月","url":"https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247483691&idx=1&sn=cbb2c35a4e81e19944f4e2e67a7b2a03&chksm=c4bdf15bff985e33b2bd3324098575a2e7948d04121ed30df356c4174bc06c416b91b54a9f7b#rd","date":"2025-04-30T23:34","id":"2247483691-1"}]}</script>
+
+  <script>
+    /* ===== 数据源 =====
+       data/articles.json 由 scripts/sync-articles.mjs 在固定 IP 的机器上定时更新。
+       页面优先 fetch 该文件；直接双击打开（file://）或离线时，用下方内联快照兜底。 */
+    const DATA_URL = './data/articles.json';
+    let records = [];
+    let archiveUpdated = '';
+    let articleCount = 0;
+
+    function normalizeArticles(payload) {
+      const raw = Array.isArray(payload) ? payload : (payload && payload.articles) || [];
+      archiveUpdated = (payload && payload.updated_at) || '';
+      articleCount = (payload && payload.article_count) || new Set(raw.map(item => item.url)).size;
+      return raw
+        .map(item => ({
+          category: item.category || 'activities',
+          type: item.type || '参与活动',
+          title: item.title || '',
+          description: item.description || '',
+          tags: Array.isArray(item.tags) ? item.tags : [],
+          keywords: item.keywords || '',
+          url: item.url || '#',
+          date: item.date || ''
+        }))
+        .filter(item => item.title && item.date)
+        .sort((a, b) => b.date.localeCompare(a.date));
+    }
+
+    async function loadArticles() {
+      try {
+        const response = await fetch(DATA_URL, { cache: 'no-cache' });
+        if (response.ok) {
+          const payload = await response.json();
+          if (payload && (Array.isArray(payload) || Array.isArray(payload.articles))) return payload;
+        }
+      } catch (error) {
+        /* file:// 直接打开或离线：用内联快照 */
+      }
+      try {
+        return JSON.parse(document.getElementById('articles-fallback').textContent);
+      } catch (error) {
+        return { articles: [] };
+      }
+    }
+
+    const header = document.getElementById('header');
+    const menuButton = document.querySelector('.menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+    const resultsGrid = document.getElementById('results-grid');
+    const searchStatus = document.getElementById('search-status');
+    const emptyState = document.getElementById('empty-state');
+    const directory = document.getElementById('directory');
+    const toast = document.getElementById('toast');
+    let activeCategory = 'all';
+    let toastTimer;
+
+    const categoryNames = { all: '全部资料', members: '成员介绍', awards: '获奖情况', activities: '参与活动', meetings: '会议纪实' };
+
+    function escapeHTML(value) {
+      return value.replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
+    }
+
+    function sortNotices() {
+      const list = document.querySelector('.notice-list');
+      if (!list) return;
+      const items = [...list.children];
+      items
+        .sort((a, b) => (b.querySelector('time')?.dateTime || '').localeCompare(a.querySelector('time')?.dateTime || ''))
+        .forEach(item => list.appendChild(item));
+    }
+
+    function renderNews() {
+      const list = document.getElementById('news-list');
+      if (!list) return;
+      list.innerHTML = [...records]
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .slice(0, 6)
+        .map(record => `
+        <li>
+          <a class="news-row" href="${record.url}" target="_blank" rel="noopener noreferrer">
+            <time datetime="${record.date}">${record.date.slice(0, 10).replaceAll('-', '.')}</time>
+            <span class="nt">${escapeHTML(record.title)}</span>
+            <span class="na">↗</span>
+          </a>
+        </li>`).join('');
+    }
+
+    function renderRecords() {
+      const query = searchInput.value.trim().toLowerCase();
+      const filtered = records.filter(record => {
+        const inCategory = activeCategory === 'all' || record.category === activeCategory;
+        const content = `${record.title} ${record.description} ${record.tags.join(' ')} ${record.keywords}`.toLowerCase();
+        return inCategory && (!query || content.includes(query));
+      }).sort((a, b) => b.date.localeCompare(a.date));
+
+      searchClear.classList.toggle('visible', Boolean(query));
+      searchStatus.innerHTML = query
+        ? `匹配 <strong>${filtered.length}</strong> 条`
+        : `共 <strong>${filtered.length}</strong> 条`;
+      emptyState.classList.toggle('visible', filtered.length === 0);
+      resultsGrid.style.display = filtered.length ? 'block' : 'none';
+      resultsGrid.innerHTML = filtered.map(record => `
+        <a class="result-card" href="${record.url}" target="_blank" rel="noopener noreferrer">
+          <span class="result-category">${record.type}</span>
+          <time class="result-date" datetime="${record.date}">${record.date.slice(0, 10).replaceAll('-', '.')}</time>
+          <h3>${escapeHTML(record.title)}</h3>
+          <p>${escapeHTML(record.description)}</p>
+          <div class="result-tags">${record.tags.map(tag => `<span>${escapeHTML(tag)}</span>`).join('')}</div>
+          <span class="result-arrow">↗</span>
+        </a>`).join('');
+    }
+
+    function setCategory(category, shouldScroll = false) {
+      activeCategory = category;
+      document.querySelectorAll('.category-tab').forEach(button => button.classList.toggle('active', button.dataset.category === category));
+      renderRecords();
+      closeMenu();
+      if (shouldScroll) directory.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function focusSearch(category) {
+      if (category) setCategory(category);
+      closeMenu();
+      directory.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => searchInput.focus({ preventScroll: true }), 500);
+    }
+
+    function closeMenu() {
+      navLinks.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', '打开菜单');
+      document.body.classList.remove('menu-open');
+    }
+
+    function updateCounts() {
+      ['all', 'members', 'awards', 'activities', 'meetings'].forEach(category => {
+        const count = category === 'all' ? records.length : records.filter(record => record.category === category).length;
+        document.getElementById(`count-${category}`).textContent = count;
+      });
+    }
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      navLinks.classList.toggle('open', !isOpen);
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? '打开菜单' : '关闭菜单');
+      document.body.classList.toggle('menu-open', !isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    document.querySelectorAll('[data-nav-category]').forEach(button => button.addEventListener('click', () => focusSearch(button.dataset.navCategory)));
+    document.querySelectorAll('[data-open-category]').forEach(button => button.addEventListener('click', () => focusSearch(button.dataset.openCategory)));
+    document.querySelectorAll('[data-open-category]').forEach(button => button.addEventListener('click', () => focusSearch(button.dataset.openCategory)));
+    document.querySelectorAll('.category-tab').forEach(button => button.addEventListener('click', () => setCategory(button.dataset.category)));
+    document.getElementById('nav-search').addEventListener('click', () => focusSearch());
+    document.getElementById('search-form').addEventListener('submit', event => event.preventDefault());
+    searchInput.addEventListener('input', renderRecords);
+    searchClear.addEventListener('click', () => { searchInput.value = ''; renderRecords(); searchInput.focus(); });
+    document.getElementById('reset-search').addEventListener('click', () => { searchInput.value = ''; setCategory('all'); searchInput.focus(); });
+
+    document.addEventListener('keydown', event => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        focusSearch();
+      }
+      if (event.key === 'Escape') closeMenu();
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth > 760) closeMenu(); });
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 24), { passive: true });
+
+    document.getElementById('copy-btn').addEventListener('click', async () => {
+      const name = '梦晴-育新联萌';
+      try {
+        await navigator.clipboard.writeText(name);
+      } catch (error) {
+        const textarea = document.createElement('textarea');
+        textarea.value = name;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+      }
+      toast.textContent = `已复制「${name}」，请前往微信搜索`;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .1 });
+    document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    header.classList.toggle('scrolled', window.scrollY > 24);
+    sortNotices();
+
+    (async () => {
+      records = normalizeArticles(await loadArticles());
+      document.getElementById('article-count').textContent = articleCount;
+      const updatedNode = document.getElementById('archive-updated');
+      if (archiveUpdated) {
+        const day = archiveUpdated.slice(0, 10);
+        updatedNode.dateTime = day;
+        updatedNode.textContent = day.replaceAll('-', '.');
+      }
+      updateCounts();
+      renderNews();
+      renderRecords();
+    })();
+
+    /* Background music: opt-in only, fades, pauses when tab is hidden */
+    (() => {
+      const audio = document.getElementById('bgm');
+      const button = document.getElementById('sound-toggle');
+      if (!audio || !button) return;
+
+      const KEY = 'mengqing-bgm';
+      const TARGET_VOLUME = 0.32;
+      let wanted = false;
+      let fadeTimer = 0;
+
+      /* 用计时器而不是 rAF 做淡入淡出：后台标签页会冻结动画帧，
+         会让音量停在半路、暂停回调也不执行 */
+      const fade = (to, duration, done) => {
+        clearInterval(fadeTimer);
+        const from = audio.volume;
+        const start = Date.now();
+        fadeTimer = setInterval(() => {
+          const progress = Math.min((Date.now() - start) / duration, 1);
+          audio.volume = Math.max(0, Math.min(1, from + (to - from) * progress));
+          if (progress >= 1) {
+            clearInterval(fadeTimer);
+            if (done) done();
+          }
+        }, 40);
+      };
+
+      const paint = on => {
+        button.classList.toggle('playing', on);
+        button.setAttribute('aria-pressed', String(on));
+        button.setAttribute('aria-label', on ? '关闭背景音乐' : '开启背景音乐');
+      };
+
+      const play = () => {
+        wanted = true;
+        audio.volume = 0;
+        const started = audio.play();
+        if (started && typeof started.then === 'function') {
+          return started
+            .then(() => { fade(TARGET_VOLUME, 1500); paint(true); return true; })
+            .catch(() => { wanted = false; paint(false); return false; });
+        }
+        fade(TARGET_VOLUME, 1500); paint(true);
+        return Promise.resolve(true);
+      };
+
+      /* 浏览器拦截了自动续播时，提示用户手动点一下 */
+      let hintTimer = 0;
+      const showHint = () => {
+        button.hidden = false;
+        button.classList.add('hint');
+        clearTimeout(hintTimer);
+        hintTimer = setTimeout(() => button.classList.remove('hint'), 14000);
+        if (typeof toast !== 'undefined' && toast) {
+          toast.textContent = '点一下右下角声音按钮，继续播放背景音乐';
+          toast.classList.add('show');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => toast.classList.remove('show'), 4600);
+        }
+      };
+
+      const stop = () => {
+        wanted = false;
+        fade(0, 600, () => audio.pause());
+        paint(false);
+      };
+
+      button.addEventListener('click', () => {
+        clearTimeout(hintTimer);
+        button.classList.remove('hint');
+        if (audio.paused) { play(); localStorage.setItem(KEY, '1'); }
+        else { stop(); localStorage.setItem(KEY, '0'); }
+      });
+
+      /* 从 bfcache 返回（前进/后退）时，浏览器会暂停媒体，这里恢复播放 */
+      window.addEventListener('pageshow', event => {
+        if (!event.persisted) return;
+        if (wanted && audio.paused) play();
+      });
+
+
+
+      // 供开始界面调用：用户点击“进入”即视为一次明确手势，可正常播放
+      window.__mqBgm = {
+        play: () => { localStorage.setItem(KEY, '1'); return play(); },
+        stop: () => { localStorage.setItem(KEY, '0'); stop(); },
+        hint: showHint
+      };
+
+      audio.addEventListener('canplaythrough', () => {
+        button.hidden = false;
+        if (localStorage.getItem(KEY) === '1') paint(false);
+      }, { once: true });
+      audio.addEventListener('error', () => { button.hidden = true; });
+
+      /* 切到别的标签页/窗口时【不暂停】，让音乐一直播。
+         只有个别浏览器（移动端为主）会自行挂起媒体，这时回到前台再恢复。 */
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden || !wanted) return;
+        if (audio.paused) {
+          audio.volume = 0;
+          const started = audio.play();
+          if (started && typeof started.then === 'function') {
+            started.then(() => { fade(TARGET_VOLUME, 900); paint(true); })
+                   .catch(() => { wanted = true; showHint(); });
+          } else {
+            fade(TARGET_VOLUME, 900);
+            paint(true);
+          }
+        }
+      });
+    })();
+
+    /* ============ Dynamic star trails (long-exposure look) ============ */
+    (() => {
+      const canvas = document.getElementById('star-trails');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const SEG = 7;
+      let W = 0, H = 0, poleX = 0, poleY = 0;
+      let stars = [];
+      let raf = 0, last = 0, warp = 0, live = true;
+
+      const rnd = (a, b) => a + Math.random() * (b - a);
+
+      function build() {
+        const count = Math.round(Math.min(150, Math.max(64, (W * H) / 12000)));
+        const far = Math.hypot(Math.max(poleX, W - poleX), Math.max(poleY, H - poleY));
+        stars = Array.from({ length: count }, () => {
+          const r = 26 + Math.pow(Math.random(), .58) * far * 1.02;
+          return {
+            r,
+            a: rnd(0, Math.PI * 2),
+            len: rnd(.18, .5) + (r / far) * .2,
+            w: rnd(.35, 1),
+            s: rnd(.88, 1.1)
+          };
+        });
+      }
+
+      function paint() {
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.lineCap = 'round';
+        for (let cls = 0; cls < 2; cls++) {
+          const base = cls === 0 ? .085 : .175;
+          for (let k = 0; k < SEG; k++) {
+            const t0 = k / SEG, t1 = (k + 1) / SEG;
+            ctx.beginPath();
+            for (const s of stars) {
+              if ((s.w >= .62 ? 1 : 0) !== cls) continue;
+              const a0 = s.a - s.len * (1 - t0);
+              const a1 = s.a - s.len * (1 - t1);
+              ctx.moveTo(poleX + Math.cos(a0) * s.r, poleY + Math.sin(a0) * s.r);
+              ctx.arc(poleX, poleY, s.r, a0, a1);
+            }
+            ctx.strokeStyle = 'rgba(184,203,255,' + (base * (.32 + .88 * t1)).toFixed(3) + ')';
+            ctx.lineWidth = cls === 0 ? .75 : 1.2;
+            ctx.stroke();
+          }
+        }
+        ctx.beginPath();
+        for (const s of stars) {
+          const x = poleX + Math.cos(s.a) * s.r;
+          const y = poleY + Math.sin(s.a) * s.r;
+          ctx.moveTo(x, y);
+          ctx.arc(x, y, s.w > .62 ? .95 : .6, 0, Math.PI * 2);
+        }
+        ctx.fillStyle = 'rgba(230,238,255,.58)';
+        ctx.fill();
+      }
+
+      function loop(ts) {
+        if (!live) return;
+        const dt = last ? Math.min((ts - last) / 1000, .05) : .016;
+        last = ts;
+        warp *= .96;
+        const speed = (.022 + warp * 1.05) * dt * Math.PI;
+        for (const s of stars) s.a += speed * s.s;
+        if (warp < .002) warp = 0;
+        paint();
+        raf = requestAnimationFrame(loop);
+      }
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+        W = window.innerWidth; H = window.innerHeight;
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        poleX = W * (W < 760 ? .5 : .46);
+        poleY = H * .3;
+        build();
+        if (reduce) paint();
+      }
+
+      let resizeTick = 0;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTick);
+        resizeTick = setTimeout(resize, 180);
+      });
+
+      document.addEventListener('visibilitychange', () => {
+        if (reduce) return;
+        if (document.hidden) { live = false; cancelAnimationFrame(raf); }
+        else if (!live) { live = true; last = 0; raf = requestAnimationFrame(loop); }
+      });
+
+      window.__mqStarWarp = () => { warp = 1; };
+
+      resize();
+      if (!reduce) raf = requestAnimationFrame(loop);
+    })();
+
+    /* ============ Entry gate ============ */
+    (() => {
+      const gate = document.getElementById('gate');
+      if (!gate) return;
+      const enterBtn = document.getElementById('gate-enter');
+      const skipBtn = document.getElementById('gate-skip');
+      const root = document.documentElement;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let leaving = false;
+
+      const focusTimer = setTimeout(() => enterBtn.focus({ preventScroll: true }), 700);
+      setTimeout(() => gate.classList.add('ready'), 2400);
+
+      function leave(withMusic) {
+        if (leaving) return;
+        leaving = true;
+        clearTimeout(focusTimer);
+        gate.classList.add('is-out');
+        root.classList.remove('has-gate');
+        document.body.classList.add('gate-done');
+        if (location.hash) {
+          const target = document.querySelector(location.hash);
+          if (target) setTimeout(() => target.scrollIntoView(), 80);
+        }
+        if (withMusic && window.__mqStarWarp) window.__mqStarWarp();
+        if (withMusic && window.__mqBgm) window.__mqBgm.play();
+        const wait = reduce ? 220 : 1150;
+        setTimeout(() => {
+          gate.hidden = true;
+          gate.setAttribute('aria-hidden', 'true');
+          enterBtn.blur();
+        }, wait);
+      }
+
+      enterBtn.addEventListener('click', () => leave(true));
+      skipBtn.addEventListener('click', () => leave(false));
+      document.addEventListener('keydown', event => {
+        if (leaving) return;
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); leave(true); }
+        else if (event.key === 'Escape') { event.preventDefault(); leave(false); }
+      });
+    })();
+  </script>
+</body>
+</html>
