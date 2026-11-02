@@ -1,10 +1,26 @@
 {
   "schema": 1,
-  "updated_at": "2026-10-27T22:00",
+  "updated_at": "2026-11-02T23:10",
   "source": "梦晴-育新联萌",
   "biz": "Mzk5MDA5NTkxMQ==",
-  "article_count": 30,
+  "article_count": 31,
   "articles": [
+    {
+      "id": "2247486319-1",
+      "title": "多线开花，喜报频传！他们在多项赛事中斩获佳绩！",
+      "url": "https://mp.weixin.qq.com/s?__biz=Mzk5MDA5NTkxMQ==&mid=2247486319&idx=1&sn=42d82d0835d2ce51d8a36ebd788ff326&chksm=c4c3ff72717f80e00cf4b0583868cc11aed1eefe0c2dd0526c250d91906324caa5663e17fa60#rd",
+      "date": "2026-11-02T22:27",
+      "category": "awards",
+      "type": "获奖情况",
+      "description": "集中公布五项赛事成果：iCAN 省赛三等奖（韦昌铉「零件不缺货」），新文科大赛校赛银奖三项（张梦雪「南粤非遗研习实践队」、刘冰雨「亲亲字画」、吴丹璇「云财定制」），铜奖一项（黄耀锋「数智霓裳」）。",
+      "tags": [
+        "iCAN",
+        "新文科大赛",
+        "五项获奖"
+      ],
+      "keywords": "喜报 iCAN 金视线杯 具身智能 三等奖 新文科 银奖 铜奖 韦昌铉 张梦雪 刘冰雨 吴丹璇 黄耀锋 零件不缺货 南粤非遗 亲亲字画 云财定制 数智霓裳",
+      "source": "manual"
+    },
     {
       "category": "members",
       "type": "成员介绍",
